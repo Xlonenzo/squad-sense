@@ -373,8 +373,3 @@ Métricas que o próprio Squad Sense calcula a cada run:
 
 A demo final pode mostrar: *"se as 8 recomendações high-confidence aceitas tivessem sido aplicadas no sprint X, o carryover teria caído de 23% para projetado 8%."* Outcome, não output.
 
----
-
-## Contato
-
-Construído por Marcos Patricio. Issues no [repo](https://github.com/) ou direto pra `marcospatricio000@gmail.com`.
