@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Env
+.env
+.env.local
+
+# Mock state (regenerável via /bootstrap/seed)
+data/mock_jira.json
+
+# Postgres data (bind mount)
+data/postgres/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Playwright MCP scratch
+.playwright-mcp/
+
+# uv
+uv.lock

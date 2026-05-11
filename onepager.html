@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<title>Squad Sense — One-Pager Executivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 landscape; margin: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #11121a;
+    --bg-3: #161826;
+    --border: #1f2030;
+    --border-2: #2a2c40;
+    --text: #e9ebf3;
+    --muted: #8a8fa3;
+    --accent: #0041FF;
+    --accent-soft: rgba(0, 65, 255, 0.14);
+    --accent-line: rgba(0, 65, 255, 0.35);
+    --ok: #4ade80;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    background: #050714; color: var(--text);
+    font-family: 'Poppins', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* PAGE = exact A4 landscape — NO flex, NO auto sizing */
+  .page {
+    width: 297mm;
+    height: 210mm;
+    padding: 9mm 11mm;
+    background:
+      radial-gradient(ellipse 140mm 70mm at top right, rgba(0,65,255,0.10), transparent 60%),
+      radial-gradient(ellipse 120mm 90mm at bottom left, rgba(45,96,255,0.06), transparent 60%),
+      var(--bg);
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+  }
+  @media screen {
+    body { background: #03040c; padding: 16px 0; }
+    .page { box-shadow: 0 30px 80px rgba(0,0,0,0.6); border-radius: 4px; }
+  }
+
+  /* HEADER — fixed height 19mm */
+  .top {
+    height: 19mm;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 3mm;
+    margin-bottom: 4mm;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .brand { display: flex; align-items: center; gap: 7px; }
+  .brand-dot { width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+  .brand-name { color: var(--muted); font-size: 8pt; text-transform: uppercase; letter-spacing: 0.22em; font-weight: 500; }
+  h1 { margin: 3px 0 1mm; font-size: 18pt; font-weight: 600; letter-spacing: -0.015em; line-height: 1.1; }
+  h1 .accent { color: var(--accent); }
+  .tagline { color: var(--muted); font-size: 8pt; margin: 0; max-width: 175mm; line-height: 1.4; }
+  .meta { color: var(--muted); font-size: 7pt; font-family: 'JetBrains Mono', monospace; text-align: right; line-height: 1.5; }
+  .meta b { color: var(--text); font-weight: 500; }
+
+  /* GRID — two columns, fixed height */
+  .grid {
+    display: grid;
+    grid-template-columns: 137mm 1fr;
+    column-gap: 6mm;
+    height: 165mm;
+  }
+  .col { display: block; }
+
+  /* Section spacing */
+  .sec { margin-bottom: 3.5mm; }
+  .sec:last-child { margin-bottom: 0; }
+  .h2 {
+    margin: 0 0 1.8mm; font-size: 7.5pt; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.20em; color: var(--accent);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .h2::before { content: ""; width: 12px; height: 1px; background: var(--accent); }
+  p { margin: 0 0 1.5mm; font-size: 8pt; line-height: 1.45; color: #d4d7e3; }
+  p b { color: var(--text); font-weight: 600; }
+  code.k {
+    font-family: 'JetBrains Mono', monospace; color: var(--accent);
+    background: var(--bg-3); border: 1px solid var(--border-2);
+    padding: 0 3px; border-radius: 2px; font-size: 7pt;
+  }
+
+  /* BULLETS */
+  .bullets { list-style: none; padding: 0; margin: 1mm 0 0; display: grid; gap: 1.5mm; }
+  .bullets.three { grid-template-columns: 1fr 1fr 1fr; }
+  .bullets.two { grid-template-columns: 1fr 1fr; }
+  .bullets li {
+    background: var(--bg-2); border: 1px solid var(--border); border-left: 2px solid var(--accent);
+    padding: 1.8mm 2.3mm; border-radius: 2px; font-size: 7.2pt; line-height: 1.35; color: #d4d7e3;
+  }
+  .bullets li b { color: var(--text); display: block; margin-bottom: 0.5mm; font-size: 7.6pt; }
+  .bullets li .tag { font-family: 'JetBrains Mono', monospace; font-size: 6.4pt; color: var(--accent); display: block; margin-bottom: 0.5mm; }
+
+  /* PIPELINE */
+  .pipeline {
+    background: var(--bg-2); border: 1px solid var(--border); border-radius: 3px;
+    padding: 2.5mm 3mm; font-family: 'JetBrains Mono', monospace; font-size: 7pt;
+    color: #c8ccda; line-height: 1.35;
+  }
+  .pipeline .r { display: flex; align-items: center; gap: 4px; margin: 1mm 0; flex-wrap: nowrap; }
+  .pipeline .b {
+    background: var(--bg-3); border: 1px solid var(--border-2); padding: 0.8mm 1.8mm;
+    border-radius: 2px; color: var(--text); text-align: center; white-space: nowrap; font-size: 7pt;
+  }
+  .pipeline .b.a { border-color: var(--accent-line); background: var(--accent-soft); color: #cdd9ff; }
+  .pipeline .ar { color: var(--accent); font-weight: 600; }
+  .pipeline .grp {
+    border: 1px dashed var(--border-2); border-radius: 3px; padding: 1.5mm 2mm; margin: 1.5mm 0;
+  }
+  .pipeline .lab { color: var(--muted); font-size: 6pt; text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 1mm; }
+  .pipeline .note { padding-left: 1.5mm; color: var(--muted); font-size: 6.5pt; }
+  .pipeline .legend { color: var(--muted); font-size: 6.4pt; margin-top: 1.5mm; padding-top: 1.2mm; border-top: 1px solid var(--border); }
+  .pipeline .legend span { color: var(--accent); font-weight: 600; }
+
+  /* LADDER */
+  .ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5mm; margin-top: 1mm; }
+  .ladder .step {
+    background: var(--bg-2); border: 1px solid var(--border); border-radius: 2px;
+    padding: 1.8mm 2mm 1.8mm 3.5mm; position: relative; overflow: hidden;
+  }
+  .ladder .step .lvl { font-family: 'JetBrains Mono', monospace; font-size: 6pt; color: var(--muted); letter-spacing: 0.1em; }
+  .ladder .step .name { font-size: 8pt; font-weight: 600; margin: 0.5mm 0 1mm; color: var(--text); }
+  .ladder .step .desc { font-size: 6.6pt; color: var(--muted); line-height: 1.3; }
+  .ladder .step .badge {
+    position: absolute; top: 1.2mm; right: 1.2mm; font-size: 5.6pt; font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 0.5mm 1.2mm; border-radius: 2px; background: var(--bg-3); color: var(--muted); border: 1px solid var(--border-2);
+  }
+  .ladder .step.current { border-color: var(--accent-line); background: linear-gradient(180deg, var(--accent-soft), var(--bg-2) 60%); }
+  .ladder .step.current .badge { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .ladder .step .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent); opacity: 0.3; }
+  .ladder .step:nth-child(2) .bar { opacity: 0.5; }
+  .ladder .step:nth-child(3) .bar { opacity: 0.7; }
+  .ladder .step:nth-child(4) .bar { opacity: 1; }
+
+  /* TABLE */
+  table.crit {
+    width: 100%; border-collapse: collapse; font-size: 7pt; margin-top: 0.5mm;
+    background: var(--bg-2); border: 1px solid var(--border); border-radius: 3px; overflow: hidden;
+  }
+  table.crit th, table.crit td { text-align: left; padding: 1.2mm 2mm; border-bottom: 1px solid var(--border); }
+  table.crit th { background: var(--bg-3); color: var(--muted); font-size: 6.2pt; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; }
+  table.crit tr:last-child td { border-bottom: none; }
+  table.crit td.k { font-weight: 600; color: var(--text); width: 28%; }
+  table.crit td.v { color: #c8ccda; line-height: 1.3; }
+  table.crit td.v code { background: var(--bg-3); border: 1px solid var(--border-2); padding: 0 3px; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 6.6pt; color: #cdd9ff; }
+  table.crit td.ok { color: var(--ok); font-family: 'JetBrains Mono', monospace; text-align: center; width: 7%; font-weight: 600; }
+
+  /* IMPACT */
+  .impact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5mm; margin-top: 1mm; }
+  .impact .card {
+    background: var(--bg-2); border: 1px solid var(--border); border-radius: 3px; padding: 2mm 2.3mm;
+  }
+  .impact .num { font-size: 15pt; font-weight: 600; color: var(--accent); letter-spacing: -0.02em; line-height: 1; }
+  .impact .num small { font-size: 7pt; color: var(--muted); font-weight: 400; margin-left: 2px; }
+  .impact .lbl { font-size: 6pt; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 1.2mm; }
+  .impact .sub { font-size: 6.4pt; color: #c8ccda; margin-top: 0.6mm; line-height: 1.3; }
+
+  /* FOOTER */
+  .bot {
+    margin-top: 4mm; padding-top: 2mm; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; color: var(--muted); font-size: 6.6pt;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em;
+  }
+  .bot b { color: var(--text); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top">
+    <div>
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Squad Sense · by Verity</span>
+      </div>
+      <h1>Agente de IA para squads que <span class="accent">aprende com o histórico do time</span></h1>
+      <p class="tagline">MVP do teste técnico <b>AI Agile Transformation Consultant</b>. Mantém o backlog calibrado e ensina o time com base em sprints passados — detecção algorítmica, narração por LLM, evidência citada literalmente.</p>
+    </div>
+    <div class="meta">
+      <div>One-Pager Executivo</div>
+      <div><b>2026-05-11</b> · v1.0</div>
+      <div>MVP completo</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="col">
+      <div class="sec">
+        <div class="h2">O Problema</div>
+        <p>Squads ágeis acumulam <b>dívida silenciosa</b> em três planos: backlog vira lixeira semântica, estimativa não aprende com o passado, refinamento manual não escala. A maioria dos "AI assistants" é wrapper de LLM — cospe sugestões genéricas sem saber se o time já viu aquele padrão antes.</p>
+        <ul class="bullets three">
+          <li><span class="tag">P1</span><b>Backlog como lixeira</b>Duplicatas com palavras diferentes, issues obsoletas, DoR violado, escopo emergente sem epic.</li>
+          <li><span class="tag">P2</span><b>Estimativa cega</b>Time subestima cronicamente integrações e tech-debt — conhecimento vive na cabeça.</li>
+          <li><span class="tag">P3</span><b>Refino manual</b>PO/SM gasta horas/semana em dedup, DoR check e agrupamento por tema.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="h2">A Solução</div>
+        <p>Squad Sense combina <b>Hygiene Pass</b> (4 detectores algorítmicos sobre o backlog atual) com <b>Pattern Mining</b> (análise longitudinal de 6+ sprints) e cruza os dois sinais. Cada finding vira recomendação com evidência específica do histórico, escrita por LLM e postada como comentário no Jira via MCP.</p>
+        <p>Princípio não-negociável: <b>"propor, não executar"</b>. O agente nunca apaga nem fecha issue silenciosamente. Toda recomendação aceita ou rejeitada vira sinal de calibração — é o <b>closed loop</b> que faz o agente melhorar com o tempo, diferente de uma ferramenta estática.</p>
+        <ul class="bullets two">
+          <li><b>Detecção algorítmica</b>Embeddings (pgvector cosine), SQL, pattern mining. Zero LLM no detect.</li>
+          <li><b>Narração com RAG</b>LLM cita issue keys, sprints e ratios reais. Sem alucinação opaca.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <div class="h2">Autonomia em 4 Níveis · Propor, Não Executar</div>
+        <p>Autonomia <b>configurável por squad</b> e crescente com confiança. Default recomendado é Nível 1 (Commenter). O MCP server <b>nunca expõe</b> <code class="k">delete_issue</code> no toolset — corte explícito de produto.</p>
+        <div class="ladder">
+          <div class="step"><div class="bar"></div><div class="lvl">NÍVEL 0</div><div class="name">Observer</div><div class="desc">Só dashboard, zero toque no Jira.</div><div class="badge">install</div></div>
+          <div class="step current"><div class="bar"></div><div class="lvl">NÍVEL 1</div><div class="name">Commenter</div><div class="desc">Comenta no Jira via MCP. Squad decide.</div><div class="badge">default</div></div>
+          <div class="step"><div class="bar"></div><div class="lvl">NÍVEL 2</div><div class="name">Linker</div><div class="desc">Adiciona link "duplicates". Opt-in.</div><div class="badge">opt-in</div></div>
+          <div class="step"><div class="bar"></div><div class="lvl">NÍVEL 3</div><div class="name">Actor</div><div class="desc">Fecha (não exclui) com conf &gt; 0.92.</div><div class="badge">guarded</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="sec">
+        <div class="h2">Pipeline Multi-Step</div>
+        <div class="pipeline">
+          <div class="r"><div class="b">Jira (real / mock)</div><span class="ar">→</span><div class="b">Postgres + pgvector</div></div>
+          <div class="grp">
+            <div class="lab">Coach Agent</div>
+            <div class="r"><div class="b a">Hygiene Pass</div><span class="ar">∥</span><div class="b a">Pattern Mining</div></div>
+            <div class="note">dedup · obsoleta · DoR · epic-emergente &nbsp;//&nbsp; subestimação · carryover</div>
+            <div class="r"><div class="b">Cross-Reference</div><span class="ar">→</span><div class="b">RAG</div><span class="ar">→</span><div class="b a">LLM Synthesis</div></div>
+          </div>
+          <div class="r"><div class="b">recommendation</div><span class="ar">→</span><div class="b a">MCP Server</div><span class="ar">→</span><div class="b">comentário no Jira</div></div>
+          <div class="r"><div class="b" style="background:transparent;border-style:dashed;">human feedback</div><span class="ar">↺</span><div class="note" style="padding-left:0;">status = accepted | rejected → calibração</div></div>
+          <div class="legend">Stack: <span>FastAPI</span> · <span>Postgres+pgvector</span> · <span>Claude Sonnet 4.6 / GPT-4o-mini</span> · <span>MCP Python SDK (stdio)</span></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="h2">Cobertura dos Critérios do Teste</div>
+        <table class="crit">
+          <thead><tr><th>Critério</th><th>Onde aparece</th><th>✓</th></tr></thead>
+          <tbody>
+            <tr><td class="k">LLM via API</td><td class="v">Anthropic <code>claude-sonnet-4-6</code> ou OpenAI <code>gpt-4o-mini</code> (auto-detect)</td><td class="ok">✓</td></tr>
+            <tr><td class="k">Multi-step</td><td class="v">ingest → hygiene → mining → cross-ref → RAG → LLM → MCP-post</td><td class="ok">✓</td></tr>
+            <tr><td class="k">Memória / contexto</td><td class="v">Tabela <code>recommendation</code> + <code>human_feedback</code>; cache por <code>text_hash</code></td><td class="ok">✓</td></tr>
+            <tr><td class="k">RAG</td><td class="v">pgvector cosine + <code>_rag_load_evidence_issues</code> para citação literal</td><td class="ok">✓</td></tr>
+            <tr><td class="k">MCP real</td><td class="v">Server Python SDK (stdio) + client com lifecycle de subprocess</td><td class="ok">✓</td></tr>
+            <tr><td class="k">Raciocínio</td><td class="v">Pattern mining longitudinal + cross-ref com evidência estruturada</td><td class="ok">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sec">
+        <div class="h2">Como Medir Impacto na Squad</div>
+        <div class="impact">
+          <div class="card"><div class="num">31<small>recs</small></div><div class="lbl">Findings detectados</div><div class="sub">5/5 padrões plantados.</div></div>
+          <div class="card"><div class="num">70<small>%</small></div><div class="lbl">Cache hit no LLM</div><div class="sub">Prompt caching ativo.</div></div>
+          <div class="card"><div class="num">8<small>/8</small></div><div class="lbl">Comments via MCP</div><div class="sub">Jira Cloud real.</div></div>
+          <div class="card"><div class="num">0<small></small></div><div class="lbl">Issue keys alucinadas</div><div class="sub">Citação literal.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bot">
+    <div><b>Squad Sense</b> · MVP entregue dentro da identidade <b>Verity Digital</b></div>
+    <div><b>README.md</b> · <b>DEMO_SCRIPT.md</b> · vídeo de execução · repositório versionado</div>
+  </div>
+
+</div>
+</body>
+</html>

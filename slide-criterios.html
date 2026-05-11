@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<title>Squad Sense — Cobertura dos critérios</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #11121a;
+    --border: #1f2030;
+    --text: #e9ebf3;
+    --muted: #8a8fa3;
+    --accent: #0041FF;
+    --accent-soft: rgba(0, 65, 255, 0.12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Poppins', system-ui, sans-serif; }
+  .slide {
+    width: 1600px;
+    height: 900px;
+    margin: 24px auto;
+    padding: 64px 80px;
+    background:
+      radial-gradient(ellipse at top right, rgba(0, 65, 255, 0.08), transparent 50%),
+      var(--bg);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 600; letter-spacing: 0.02em; }
+  .brand-dot { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+  .brand-name { color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; }
+  h1 { margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.01em; }
+  h1 .accent { color: var(--accent); }
+  .meta { color: var(--muted); font-size: 14px; font-family: 'JetBrains Mono', monospace; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 18px; }
+  th, td { text-align: left; padding: 18px 20px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); font-weight: 500; padding-top: 0; padding-bottom: 12px; }
+  tr:last-child td { border-bottom: none; }
+  td.crit { width: 32%; font-weight: 600; }
+  td.crit .badge { display: inline-block; background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(0,65,255,0.35); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: 'JetBrains Mono', monospace; margin-right: 10px; vertical-align: middle; }
+  td.where { color: var(--text); line-height: 1.5; }
+  td.where code { background: var(--bg-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #c8ccda; }
+  .arrow { color: var(--accent); font-weight: 500; }
+
+  footer { margin-top: auto; display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body>
+  <section class="slide">
+    <header>
+      <div>
+        <div class="brand">
+          <span class="brand-dot"></span>
+          <span class="brand-name">Squad Sense · by Verity</span>
+        </div>
+        <h1>Cobertura dos <span class="accent">critérios obrigatórios</span></h1>
+      </div>
+      <div class="meta">cena 8 · 7:45–9:00</div>
+    </header>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th>Onde aparece</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="crit"><span class="badge">01</span>LLM via API</td>
+          <td class="where">Anthropic ou OpenAI, auto-detect em <code>make_llm_client</code>.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">02</span>Multi-step</td>
+          <td class="where">ingest <span class="arrow">→</span> hygiene <span class="arrow">→</span> mining <span class="arrow">→</span> cross-ref <span class="arrow">→</span> trigger <span class="arrow">→</span> RAG <span class="arrow">→</span> LLM <span class="arrow">→</span> persist <span class="arrow">→</span> MCP-post.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">03</span>Orquestração — abordagem própria</td>
+          <td class="where">Pipeline linear em <code>CoachAgent</code>, sem LangChain/CrewAI. Etapas fixas e auditáveis; ramificação dinâmica no MCP. Framework custaria peso sem benefício.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">04</span>Memória / contexto</td>
+          <td class="where"><code>recommendation</code> com <code>status</code> + <code>human_feedback</code>, <code>text_hash</code> evita reembedar, <code>jira_comment_id</code> evita repostar.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">05</span>RAG</td>
+          <td class="where">pgvector cosine no dedup detector + injeção literal de issues no user prompt do LLM.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">06</span>MCP real</td>
+          <td class="where">Server próprio em Python SDK via stdio, 3 tools (<code>get_issue</code>, <code>list_comments</code>, <code>add_comment</code>); comments visíveis na UI do Jira.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">07</span>Raciocínio</td>
+          <td class="where">Pattern mining longitudinal e cross-reference em SQL + estatística; LLM só sintetiza com evidência. Não é Q&amp;A genérico.</td>
+        </tr>
+        <tr>
+          <td class="crit"><span class="badge">08</span>Qualidade</td>
+          <td class="where"><code>Protocol</code>s para mock toggle e providers, async-first, structlog, prompt caching com telemetria.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <footer>
+      <span>squad-sense · MVP completo</span>
+      <span>marcospatricio000@gmail.com</span>
+    </footer>
+  </section>
+</body>
+</html>

@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: squad-sense-postgres
+    environment:
+      POSTGRES_USER: squad
+      POSTGRES_PASSWORD: squad
+      POSTGRES_DB: squad_sense
+    ports:
+      - "5434:5432"  # 5432 está em uso por Postgres local; 5433 ficou stale após restart. Usamos 5434.
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U squad -d squad_sense"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+# Redis fica para a Etapa 3 (cache de embeddings + memória curta do agente).
+# Se você já tem Redis local em 6379, o app reaproveita via REDIS_URL.
