@@ -341,7 +341,7 @@ docker-compose.yml               Postgres pgvector pg16 (porta host 5434)
 
 ## Nota sobre versionamento
 
-O projeto foi desenvolvido localmente em iterações ao longo do teste técnico (etapas 1 → 2 → 3a → 3b → 3c, marcadas no README). O repositório no GitHub foi publicado como **snapshot único** ao final, então o histórico de commits aqui não reflete a evolução incremental — mostra apenas o estado final entregue. Mantive a transparência sobre isso em vez de reescrever o histórico artificialmente.
+O projeto foi desenvolvido localmente em iterações ao longo do teste técnico (etapas 1 → 2 → 3a → 3b → 3c, marcadas no README). O repositório no GitHub foi publicado como **snapshot único** ao final, então o histórico de commits aqui não reflete a evolução incremental — mostra apenas o estado final entregue.
 
 Decisões técnicas que normalmente ficariam visíveis no `git log` (escolha de stack, mudanças de abordagem, trade-offs) estão documentadas explicitamente nas seções [Decisões técnicas](#decisões-técnicas) e [Como contexto, memória, RAG e MCP foram tratados](#como-contexto-memória-rag-e-mcp-foram-tratados).
 
